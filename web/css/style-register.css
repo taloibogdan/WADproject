@@ -1,0 +1,39 @@
+/*http://bootsnipp.com/snippets/DVXQa*/
+@font-face {
+font-family: fly-walk;
+src: url(Fly-n-Walk.ttf);
+}
+body {
+    background-color: #eee;
+    background-image: url("../img/fondo.png");
+}
+
+*[role="form"] {
+    max-width: 530px;
+    padding: 15px;
+    margin: 0 auto;    
+    border-radius: 0.3em;
+}
+
+*[role="form"] h2 {
+    margin-left: 5em;
+    margin-bottom: 1em;
+}
+#mainTitle
+{
+    font-family: fly-walk;
+    font-size: 400%;
+    margin-left: 27%;
+    margin-top: 10%;
+    color: #265A88;
+    text-decoration:none;
+}
+#mainTitle2:hover{
+    text-decoration:none;
+}
+#mainTitle2
+{
+    text-decoration:none;
+}
+
+
