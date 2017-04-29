@@ -4,12 +4,16 @@ import java.io.Serializable;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -24,6 +28,12 @@ public class User implements Serializable{
     String password = null;
     String name = null;
     String email = null;
+    
+    @OneToMany(cascade = CascadeType.PERSIST, mappedBy="owner")
+    private Set<Photo> photos = new HashSet<Photo>();
+    
+    @OneToMany(cascade = CascadeType.PERSIST, mappedBy="editor")
+    private Set<Edit> edits = new HashSet<Edit>();
     
     public String encrypt(String pass){
         try {
@@ -81,6 +91,32 @@ public class User implements Serializable{
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public Set<Photo> getPhotos() {
+        return photos;
+    }
+
+    public void setPhotos(Set<Photo> photos) {
+        this.photos = photos;
+    }
+    
+    public void addPhoto(Photo photo)
+    {
+        this.photos.add(photo);
+    }
+
+    public Set<Edit> getEdits() {
+        return edits;
+    }
+
+    public void setEdits(Set<Edit> edits) {
+        this.edits = edits;
+    }
+    
+    public void addEdit(Edit edit)
+    {
+        this.edits.add(edit);
     }
     
 }

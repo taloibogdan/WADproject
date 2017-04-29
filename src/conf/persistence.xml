@@ -3,6 +3,8 @@
   <persistence-unit name="DatabasePU" transaction-type="JTA">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
     <jta-data-source>java:/WADproj</jta-data-source>
+    <class>Models.Edit</class>
+    <class>Models.Photo</class>
     <class>Models.User</class>
     <exclude-unlisted-classes>true</exclude-unlisted-classes>
     <properties>

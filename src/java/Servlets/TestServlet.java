@@ -1,6 +1,6 @@
 package Servlets;
 
-import Database.DBhandler;
+import Managers.DBhandler;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -16,11 +16,11 @@ public class TestServlet extends HttpServlet {
             throws ServletException, IOException {
         
         DBhandler db = DBhandler.getInstance();
-        db.fillUsers();
+        db.fillDB();
         
         response.setContentType("text/html");
         PrintWriter out = response.getWriter();
-        out.println("user1: "+db.isUserInDB("user1")+"<br/>user3: "+db.isUserInDB("user3"));
+        out.println("admin: "+db.isUserInDB("admin"));
         out.flush();
     }
 

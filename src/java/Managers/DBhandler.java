@@ -1,5 +1,7 @@
-package Database;
+package Managers;
 
+import Models.Photo;
+import Models.Edit;
 import Models.User;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
@@ -28,31 +30,49 @@ public class DBhandler {
         userT = u;
     }
     /**
-     * Fills the database with some test users
+     * Fills the database with some initial data if it is not already initialized
      */
-    public void fillUsers()
+    public void fillDB()
     {
+        if(isUserInDB("admin")) return;
         try {
             userT.begin();
             em.getTransaction().begin();
+            
             User u = new User();
-            u.setUsername("user1");
-            u.setPassword("pass1234");
-            u.setName("User 1");
-            u.setEmail("user1@gmail.com");
+            u.setUsername("admin");
+            u.setPassword("pass123admin");
+            u.setName("Admin");
+            u.setEmail("admin@gmail.com");
             em.persist(u);
-            u = new User();
-            u.setUsername("user2");
-            u.setPassword("pass1235");
-            u.setName("User 2");
-            u.setEmail("user2@gmail.com");
-            em.persist(u);
+            
+            Photo p = new Photo("photos/nophotoshop1.jpg", "Test", 10, u);
+            em.persist(p);
+            
+            Edit e = new Edit("photos/good1.jpg","Test comm", u, p);
+            e.watermark();
+            em.persist(e);
+            
             em.flush();
+            
             em.getTransaction().commit();
             userT.commit();
         } catch (Exception ex) {
-            ex.printStackTrace();
+            System.out.println(ex.getMessage());
         }
+    }
+    
+    /**
+     * @param user the username
+     * @return A User object if the username exists in the database
+     * or null in case the user does not exist
+     */
+    public Photo getPhoto(int id)
+    {
+        Query q = em.createQuery("SELECT p FROM Photo p WHERE p.id="+id);
+        if (q.getResultList().isEmpty())
+            return null;
+        return (Photo)q.getResultList().get(0);
     }
     
     /**
