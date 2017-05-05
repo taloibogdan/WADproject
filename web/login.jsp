@@ -12,15 +12,7 @@
         <title>Login</title>
             
         <!--Para que no se pueda ampliar en dispositivos moviles-->
-        <meta name= "viewport" content="width=device-width, initial-scale=1">  
-        
-        <!-- JS JQuery --> 
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-        <!-- Validation -->        
-        <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js"></script>
-        <script src="js/validationLogin.js"></script>
-         
+        <meta name= "viewport" content="width=device-width, initial-scale=1">   
         <!-- CSS -->        
         <link rel = "stylesheet" type = "text/css" href = "css/login.css" />
         <link rel="stylesheet" href="css/bootstrap.min.css">  
@@ -28,30 +20,25 @@
 
         <!-- Bootstrap Core JavaScript -->
         <script src="js/bootstrap.min.js"></script>
-        
     </head>
     <body>
-        <section id="login">
+        <section id="login" style="top: 5%">
         <div class="container">
-            <h1 id="title">PHOTOHELP</h1>
+            <a href="index.jsp" id="title" style=" margin-left: 35%; text-decoration: none ">PHOTOHELP</a>            
         	<div class="row">
         	    <div class="col-xs-12 main">
             	    <div class="form-wrap">
                     <h1 class="descryption">Log in with your account</h1>
-                        <form role="form" action="LoginController" method="post" id="login-form" autocomplete="off">
+                        <form role="form" action="javascript:;" method="post" id="login-form" autocomplete="off">
                             <div class="form-group">
-                                <label for="identifier" class="sr-only">Email or Username</label>
-                                <input type="text" name="identifier" id="identifier" class="form-control" placeholder="Identifier" value="${requestScope.identifier}">
-                                <c:if test="${not empty requestScope.idenError}">
-                                    <label id="identifier-error" class="error" for="identifier" style="">${requestScope.idenError}</label>
-                                </c:if>
+                                <label for="email" class="sr-only">Email</label>
+                                <input type="email" name="email" id="email" class="form-control" placeholder="Identifier">
                             </div>
                             <div class="form-group">
-                                <label for="password" class="sr-only">Password</label>
-                                <input type="password" name="password" id="password" class="form-control" placeholder="Password">
+                                <label for="key" class="sr-only">Password</label>
+                                <input type="password" name="key" id="key" class="form-control" placeholder="Password">
                             </div>                            
                             <input type="submit" id="btn-login" class="btn btn-custom btn-lg btn-block" value="Log in">
-                            
                         </form>
                         <a href="javascript:;" class="forget" data-toggle="modal" data-target=".forget-modal">Forgot your password?</a>
                         <hr>
