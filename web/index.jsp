@@ -4,6 +4,7 @@
     Author     : casso
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -52,17 +53,25 @@
         <div class="sidebar-nav-fixed affix">
             <div class="well left-nav">
                 <ul class="nav">                        
-                    <img class="avatar" src="images/avatar.png" width ="80%">
-                    <h4 id="nameUser">Username</h4>
-                    <li class="active"><a href="#">Notifications</a>
-                    </li>
-                    <li><a href="#">Profile</a>
-                    </li>
-                    <li><a href="#">My Photos</a>
-                    </li>
-                    <li><a href="#">My Designs</a>
-                    </li>   
-                    <a href="#" class="hidden-sm"><i class="ion-log-out logOut"></i></a>
+                    <c:if test="${not empty sessionScope.user}">
+                        <img class="avatar" src="images/avatar.png" width ="80%">
+                        <h4 id="nameUser">${sessionScope.user.getUsername()}</h4>
+                        <li class="active"><a href="#">Notifications</a>
+                        </li>
+                        <li><a href="#">Profile</a>
+                        </li>
+                        <li><a href="#">My Photos</a>
+                        </li>
+                        <li><a href="#">My Designs</a>
+                        </li>   
+                        <a href="#" class="hidden-sm"><i class="ion-log-out logOut"></i></a>
+                    </c:if>
+                    <c:if test="${empty sessionScope.user}">
+                        <li class="active"><a href="login.jsp">Log In</a>
+                        </li>
+                        <li><a href="register.jsp">Register</a>
+                        </li>
+                    </c:if>
                 </ul>
                 
             </div>

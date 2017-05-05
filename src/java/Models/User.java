@@ -28,6 +28,7 @@ public class User implements Serializable{
     String password = null;
     String name = null;
     String email = null;
+    String country = null;
     
     @OneToMany(cascade = CascadeType.PERSIST, mappedBy="owner")
     private Set<Photo> photos = new HashSet<Photo>();
@@ -47,6 +48,14 @@ public class User implements Serializable{
     }
     
     public User(){
+    }
+    
+    public User(String n, String u, String p, String e, String c) {
+        username = u;
+        name = n;
+        password = encrypt(p);
+        email = e;
+        country = c;
     }
     
     public int getId() {
@@ -117,6 +126,14 @@ public class User implements Serializable{
     public void addEdit(Edit edit)
     {
         this.edits.add(edit);
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
     }
     
 }

@@ -2,7 +2,7 @@ $(document).ready(function () {
 
     $('#login-form').validate({ // initialize the plugin
         rules: {
-            username: {
+            identifier: {
                 required: true,               
                 minlength: 4
             },

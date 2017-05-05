@@ -62,6 +62,21 @@ public class DBhandler {
         }
     }
     
+    public boolean AddUser(User u)
+    {
+        try {
+            userT.begin();
+            em.getTransaction().begin();
+            em.persist(u);
+            em.flush();
+            em.getTransaction().commit();
+            userT.commit();
+        } catch (Exception ex) {
+            return false;
+        }
+        return true;
+    }
+    
     /**
      * @param user the username
      * @return A User object if the username exists in the database
@@ -105,6 +120,42 @@ public class DBhandler {
     public boolean checkUserPass(String user, String pass)
     {
         User u = getUser(user);
+        if (u == null)
+        {
+            return false;
+        }
+        return u.checkPassword(pass);
+    }
+    /**
+     * @param email the email
+     * @return A User object if a user with the email exists in the database
+     * or null in case the email does not exist
+     */
+    public User getUserByEmail(String email)
+    {
+        Query q = em.createQuery("SELECT u FROM User u WHERE u.email='"+email+"'");
+        if (q.getResultList().isEmpty())
+            return null;
+        return (User)q.getResultList().get(0);
+    }
+    
+    /**
+     * @param email the email
+     * @return true if a user with that email exists, false otherwise
+     */
+    public boolean isEmailInDB(String email)
+    {
+        return getUserByEmail(email) != null;
+    }
+    
+    /**
+     * @param email the email
+     * @param pass the password
+     * @return true if a user with the email exists and the given password matches the user's, false otherwise
+     */
+    public boolean checkEmailPass(String email, String pass)
+    {
+        User u = getUserByEmail(email);
         if (u == null)
         {
             return false;
