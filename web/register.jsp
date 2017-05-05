@@ -1,6 +1,6 @@
 <%-- 
-    Document   : login
-    Created on : 20-abr-2017, 19:38:43
+    Document   : register
+    Created on : 20-abr-2017, 17:19:51
     Author     : casso
 --%>
 
@@ -8,66 +8,97 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Login</title>
-            
-        <!--Para que no se pueda ampliar en dispositivos moviles-->
-        <meta name= "viewport" content="width=device-width, initial-scale=1">   
-        <!-- CSS -->        
-        <link rel = "stylesheet" type = "text/css" href = "css/login.css" />
-        <link rel="stylesheet" href="css/bootstrap.min.css">  
-
-
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">        
+        
+        <link rel="stylesheet" href="style.css" type="text/css"/>
+        <title>Registration</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width">
+        
+        <!-- JS JQuery --> 
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <!-- Validation -->        
+        <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js"></script>
+        <script src="js/validationRegister.js"></script>
+        
         <!-- Bootstrap Core JavaScript -->
         <script src="js/bootstrap.min.js"></script>
+        
+        <!-- CSS -->        
+        <link rel = "stylesheet" type = "text/css" href = "css/style-register.css" />
+        <link rel = "stylesheet" type = "text/css" href = "css/bootstrap.min.css" />
+        <link rel = "stylesheet" type = "text/css" href = "css/bootstrap-theme.min.css" />            
+        
     </head>
     <body>
-        <section id="login" style="top: 5%">
         <div class="container">
-            <a href="index.jsp" id="title" style=" margin-left: 35%; text-decoration: none ">PHOTOHELP</a>            
-        	<div class="row">
-        	    <div class="col-xs-12 main">
-            	    <div class="form-wrap">
-                    <h1 class="descryption">Log in with your account</h1>
-                        <form role="form" action="javascript:;" method="post" id="login-form" autocomplete="off">
-                            <div class="form-group">
-                                <label for="email" class="sr-only">Email</label>
-                                <input type="email" name="email" id="email" class="form-control" placeholder="Identifier">
-                            </div>
-                            <div class="form-group">
-                                <label for="key" class="sr-only">Password</label>
-                                <input type="password" name="key" id="key" class="form-control" placeholder="Password">
-                            </div>                            
-                            <input type="submit" id="btn-login" class="btn btn-custom btn-lg btn-block" value="Log in">
-                        </form>
-                        <a href="javascript:;" class="forget" data-toggle="modal" data-target=".forget-modal">Forgot your password?</a>
-                        <hr>
-            	    </div>
-        		</div> <!-- /.col-xs-12 -->
-        	</div> <!-- /.row -->
-        </div> <!-- /.container -->
-    </section>
-
-    <div class="modal fade forget-modal" tabindex="-1" role="dialog" aria-labelledby="myForgetModalLabel" aria-hidden="true">
-    	<div class="modal-dialog modal-sm">
-    		<div class="modal-content">
-    			<div class="modal-header">
-    				<button type="button" class="close" data-dismiss="modal">
-    					<span aria-hidden="true">×</span>
-    					<span class="sr-only">Close</span>
-    				</button>
-    				<h4 class="modal-title">Recovery password</h4>
-    			</div>
-    			<div class="modal-body">
-    				<p>Type your email account</p>
-    				<input type="email" name="recovery-email" id="recovery-email" class="form-control" autocomplete="off">
-    			</div>
-    			<div class="modal-footer">
-    				<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-    				<button type="button" class="btn btn-custom">Recovery</button>
-    			</div>
-    		</div> <!-- /.modal-content -->
-    	</div> <!-- /.modal-dialog -->
-    </div> <!-- /.modal -->
+            <form id="registerForm" class="form-horizontal" role="form" action="RegistrationController" method="post">
+                <a href="index.jsp" id="mainTitle2"><h1 id="mainTitle">BestSeller</h1></a>               
+                <div class="form-group">
+                    <label for="firstName" class="col-sm-3 control-label">Full Name</label>
+                    <div class="col-sm-9">
+                        <input name="firstName" type="text" id="firstName" placeholder="Full Name" class="form-control" autofocus value="${requestScope.name}">
+                        <span class="help-block">Last Name, First Name, eg.: Smith, Harry</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="username" class="col-sm-3 control-label">Username</label>
+                    <div class="col-sm-9">
+                        <input name="username" type="text" id="username" placeholder="Username" class="form-control" value="${requestScope.user}">
+                        <c:if test="${not empty requestScope.unameError}">
+                            <label id="username-exists-error" class="error" for="username" style="">${requestScope.unameError}</label>
+                        </c:if>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="email" class="col-sm-3 control-label">Email</label>
+                    <div class="col-sm-9">
+                        <input name="email" type="email" id="email" placeholder="Email" class="form-control" value="${requestScope.email}">
+                        <c:if test="${not empty requestScope.emailError}">
+                            <label id="email-exists-error" class="error" for="email" style="">${requestScope.emailError}</label>
+                        </c:if>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="password" class="col-sm-3 control-label">Password</label>
+                    <div class="col-sm-9">
+                        <input name="password" type="password" id="password" placeholder="Password" class="form-control">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="rpassword" class="col-sm-3 control-label">Retype Password</label>
+                    <div class="col-sm-9">
+                        <input name="rpassword" type="password" id="rpassword" placeholder="Password Again" class="form-control">
+                    </div>
+                </div>                
+                <div class="form-group">
+                    <label for="country" class="col-sm-3 control-label">Country</label>
+                    <div class="col-sm-9">
+                        <select id="country" class="form-control" value="${requestScope.country}">
+                            <option>Spain</option>
+                            <option>Italy</option>
+                            <option>Afghanistan</option>
+                            <option>Bahamas</option>
+                            <option>Cambodia</option>
+                            <option>Denmark</option>
+                            <option>Ecuador</option>
+                            <option>Romania</option>
+                            <option>Fiji</option>
+                            <option>Gabon</option>
+                            <option>Haiti</option>
+                        </select>
+                    </div>
+                </div> <!-- /.form-group -->    
+                <div class="form-group">
+                    <div class="col-sm-9 col-sm-offset-3">
+                        <button type="submit" class="btn btn-primary btn-block">Register</button>
+                        <c:if test="${not empty requestScope.dbError}">
+                            <label id="database-error" class="error" for="submit" style="">${requestScope.dbError}</label>
+                        </c:if>
+                    </div>
+                </div>
+            </form> <!-- /form -->
+        </div> <!-- ./container -->
     </body>
 </html>
