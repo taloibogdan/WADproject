@@ -70,18 +70,21 @@
             <!--/.well -->
         </div>
         
-        <h2 style="text-align:center">Wild athletics</h2>
+        <h2 style="text-align:center; margin-right: 20%">Wild athletics</h2>
         
         
-        <div class="container postContent">      
-            <div class="columns">
+        <div class="container postContent" style="margin-top: 40px; ">      
+            <div class="columns" style="position: fixed; left: 60%;margin-bottom: 10%; bottom: 25%">
               <ul class="price">
                 <li class="header">Before</li>
                 <li class="grey">Username</li>
                 <li><img class="imageMain" src="photos/good1.jpg" width="30%"></li>
                 <li>
                     <p>Petitions...</p>
-                </li>                
+                </li>     
+                <li>
+                    <p>05/05/2017</p>
+                </li>   
                 <li class="grey"><a href="#" class="button">Download</a></li>
               </ul>
             </div>
@@ -94,11 +97,65 @@
                 <li>
                     <p>Rate ★★★★★</p>
                 </li>
+                <li>
+                    <input type="checkbox" name="select" value="isSelected" style="">Select to buy<br>
+                </li>                
                 <li class="grey"><a href="#" class="button">Download</a></li>
               </ul>
             </div>
-
         </div>
+        <div class="container postContent"style="margin-top: 40px">              
+            <div class="columns">
+              <ul class="price">
+                <li class="header">After</li>
+                <li class="grey">Username</li>
+                <li><img class="imageMain" src="photos/good1.jpg" width="30%"></li>
+                
+                <li>
+                    <p>Rate ★★★★★</p>
+                </li>
+                <li>
+                    <input type="checkbox" name="select" value="isSelected" style="">Select to buy<br>
+                </li>                
+                <li class="grey"><a href="#" class="button">Download</a></li>
+              </ul>
+            </div>
+        </div>
+        <div class="container postContent"style="margin-top: 40px">              
+            <div class="columns">
+              <ul class="price">
+                <li class="header">After</li>
+                <li class="grey">Username</li>
+                <li><img class="imageMain" src="photos/good1.jpg" width="30%"></li>
+                
+                <li>
+                    <p>Rate ★★★★★</p>
+                </li>
+                <li>
+                    <input type="checkbox" name="select" value="isSelected" style="">Select to buy<br>
+                </li>                
+                <li class="grey"><a href="#" class="button">Download</a></li>
+              </ul>
+            </div>
+        </div>
+        <div class="container postContent"style="margin-top: 40px">              
+            <div class="columns">
+              <ul class="price">
+                <li class="header">After</li>
+                <li class="grey">Username</li>
+                <li><img class="imageMain" src="photos/good1.jpg" width="30%"></li>
+                
+                <li>
+                    <p>Rate ★★★★★</p>
+                </li>
+                <li>
+                    <input type="checkbox" name="select" value="isSelected" style="">Select to buy<br>
+                </li>                
+                <li class="grey"><a href="#" class="button">Download</a></li>
+              </ul>
+            </div>
+        </div>
+        
 
         
         
