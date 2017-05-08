@@ -58,6 +58,8 @@
                         <h4 id="nameUser">${sessionScope.user.getUsername()}</h4>
                         <li class="active"><a href="#">Notifications</a>
                         </li>
+                        <li><a href="request.jsp">Add Request</a>
+                        </li>
                         <li><a href="#">Profile</a>
                         </li>
                         <li><a href="#">My Photos</a>
