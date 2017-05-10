@@ -62,6 +62,21 @@ public class DBhandler {
         }
     }
     
+    public boolean AddPhoto(Photo p)
+    {
+         try {
+            userT.begin();
+            em.getTransaction().begin();
+            em.persist(p);
+            em.flush();
+            em.getTransaction().commit();
+            userT.commit();
+        } catch (Exception ex) {
+            return false;
+        }
+        return true;
+    }
+    
     public boolean AddUser(User u)
     {
         try {
