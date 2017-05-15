@@ -3,8 +3,7 @@
 }
 
 .columns {
-    float: left;
-    width: 33.3%;
+    float: left;    
     padding: 8px;
     height: 400px !important;
     margin-bottom: 200px;
@@ -64,4 +63,11 @@
 {
 	display: inline-block;
 	margin-left: 30% !important;
+        width: 500px;
+}
+.postAfter{
+    display: inline-block !important;
+    margin-top: 25px;
+    width: 500px;
+    
 }
