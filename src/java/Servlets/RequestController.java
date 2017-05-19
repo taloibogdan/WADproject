@@ -62,10 +62,10 @@ public class RequestController extends HttpServlet {
             while ((read = filecontent.read(bytes)) != -1) {
                 out.write(bytes, 0, read);
             }
-            
-            Photo p = new Photo(path, desc, 0, (User)request.getAttribute("user"));
+            User u = (User)request.getSession().getAttribute("user");
+            Photo p = new Photo(name, path, desc, 0, u);
             DBhandler.getInstance().AddPhoto(p);
-            
+            request.getSession().setAttribute("user", DBhandler.getInstance().getUser(u.getUsername()));
         } catch (FileNotFoundException fne) {
             System.out.println(fne.getMessage());
         } finally {

@@ -20,30 +20,32 @@ public class Photo implements Serializable{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+    private String name = null;
     private String path = null;
     private String request = null;
-    private float comission = 0;
+    private float commission = 0;
     private boolean done = false;
     
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne()
     private User owner = null;
 
-    @OneToMany(cascade = CascadeType.PERSIST, mappedBy="original")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy="original")
     private Set<Edit> edits = new HashSet<Edit>();
-    
-    
+        
     public Photo() {
     }
 
-    public Photo(String path, String request) {
+    public Photo(String name, String path, String request) {
+        this.name = name;
         this.path = path;
         this.request = request;
     }
     
-    public Photo(String path, String request, float comission, User owner) {
+    public Photo(String name, String path, String request, float comission, User owner) {
+        this.name = name;
         this.path = path;
         this.request = request;
-        this.comission = comission;
+        this.commission = comission;
         this.owner = owner;
     }
 
@@ -53,6 +55,14 @@ public class Photo implements Serializable{
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getPath() {
@@ -79,12 +89,12 @@ public class Photo implements Serializable{
         this.owner = owner;
     }
 
-    public float getComission() {
-        return comission;
+    public float getCommission() {
+        return commission;
     }
 
-    public void setComission(float comission) {
-        this.comission = comission;
+    public void setCommission(float commission) {
+        this.commission = commission;
     }
 
     public Set<Edit> getEdits() {

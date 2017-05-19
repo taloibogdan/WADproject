@@ -5,8 +5,6 @@
  */
 package Servlets;
 
-import Managers.DBhandler;
-import Models.User;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -16,9 +14,9 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author root
+ * @author Exodus
  */
-public class LoginController extends HttpServlet {
+public class LogoutController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -31,43 +29,8 @@ public class LoginController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        request.getSession().removeAttribute("user");
         request.getSession().invalidate();
-        String identifier = request.getParameter("identifier");
-        String pass = request.getParameter("password");
-        
-        request.setAttribute("identifier", identifier);
-        request.setAttribute("password", pass);
-        
-        DBhandler db = DBhandler.getInstance();
-        
-        boolean back = false;
-        if(identifier.contains("@"))
-            if(db.checkEmailPass(identifier, pass))
-            {
-                request.getSession().setAttribute("user", db.getUserByEmail(identifier));
-            }
-            else
-            {
-                back = true;
-                System.out.println("not email");
-            }
-        else
-        if(db.checkUserPass(identifier, pass))
-            {
-                request.getSession().setAttribute("user", db.getUser(identifier));
-            }
-            else
-            {
-                back = true;
-                System.out.println("not user");
-            }
-        if(back)
-        {
-            request.setAttribute("idenError", "The identifier and the password do not match or the user does not exist.");
-            request.getRequestDispatcher("login.jsp").forward(request, response);
-            return;
-        }
-        
         request.getRequestDispatcher("index.jsp").forward(request, response);
     }
 

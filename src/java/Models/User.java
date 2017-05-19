@@ -30,10 +30,10 @@ public class User implements Serializable{
     String email = null;
     String country = null;
     
-    @OneToMany(cascade = CascadeType.PERSIST, mappedBy="owner")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy="owner")
     private Set<Photo> photos = new HashSet<Photo>();
     
-    @OneToMany(cascade = CascadeType.PERSIST, mappedBy="editor")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy="editor")
     private Set<Edit> edits = new HashSet<Edit>();
     
     public String encrypt(String pass){

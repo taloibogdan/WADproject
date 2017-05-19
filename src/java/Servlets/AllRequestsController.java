@@ -1,27 +1,37 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package Servlets;
 
 import Managers.DBhandler;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet(name = "TestServlet")
-public class TestServlet extends HttpServlet {
-     
+/**
+ *
+ * @author Exodus
+ */
+public class AllRequestsController extends HttpServlet {
+
+    /**
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        DBhandler db = DBhandler.getInstance();
-        db.fillDB();
-        
-        response.setContentType("text/html");
-        PrintWriter out = response.getWriter();
-        out.println("admin: "+db.isUserInDB("admin"));
-        out.flush();
+        request.setAttribute("allphotos", DBhandler.getInstance().getAllRequests());
+        request.getRequestDispatcher("allrequests.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

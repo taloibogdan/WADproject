@@ -5,11 +5,12 @@
 
     <h2 style="text-align:center; margin-left: 1%">My Requests</h2>
     
-    <c:forEach var="photo" items="${sessionScope.user.getPhotos()}">
+    <c:forEach var="photo" items="${allphotos}">
         <div class="container postContent" style="margin-top: 40px; ">           
             <div class="columns">
               <ul class="price">
                 <li class="header">${photo.getName()}</li>
+                <li class="grey">${photo.getOwner().getUsername()}</li>
                 <li><img class="imageMain" src="${photo.getPath()}" width="30%"></li>
                 
                 <li>

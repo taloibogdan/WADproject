@@ -3,6 +3,7 @@ package Managers;
 import Models.Photo;
 import Models.Edit;
 import Models.User;
+import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import javax.transaction.UserTransaction;
@@ -23,7 +24,7 @@ public class DBhandler {
     
     private EntityManager em;
     private UserTransaction userT;
-    
+        
     public void init(EntityManager e, UserTransaction u)
     {
         em = e;
@@ -46,10 +47,10 @@ public class DBhandler {
             u.setEmail("admin@gmail.com");
             em.persist(u);
             
-            Photo p = new Photo("photos/nophotoshop1.jpg", "Test", 10, u);
+            Photo p = new Photo("Test Photo", "photos/before1.jpg", "Test", 10, u);
             em.persist(p);
             
-            Edit e = new Edit("photos/good1.jpg","Test comm", u, p);
+            Edit e = new Edit("photos/after1.jpg","Test comm", u, p);
             e.watermark();
             em.persist(e);
             
@@ -62,12 +63,36 @@ public class DBhandler {
         }
     }
     
+    public List<Photo> getAllRequests()
+    {
+        return em.createQuery("Select p from Photo p").getResultList();
+    }
+    
+    public boolean AddEdit(Edit e)
+    {
+         try {
+            userT.begin();
+            em.getTransaction().begin();
+            e.watermark();
+            e = em.merge(e);
+            e.getEditor().addEdit(e);
+            e.getOriginal().addEdit(e);
+            em.flush();
+            em.getTransaction().commit();
+            userT.commit();
+        } catch (Exception ex) {
+            return false;
+        }
+        return true;
+    }
+    
     public boolean AddPhoto(Photo p)
     {
          try {
             userT.begin();
             em.getTransaction().begin();
-            em.persist(p);
+            p = em.merge(p);
+            p.getOwner().addPhoto(p);
             em.flush();
             em.getTransaction().commit();
             userT.commit();

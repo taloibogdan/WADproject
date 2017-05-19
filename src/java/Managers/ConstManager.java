@@ -12,7 +12,7 @@ import java.util.Random;
  * @author root
  */
 public class ConstManager {
-    public static String PathToWatermark = "images/watermark.png";
+    public static String PathToWatermark = "images\\watermark.png";
     public static String PathToWeb = "";
     public static Random Rand = new Random();
     

@@ -32,6 +32,10 @@
         <!-- Slider --> 
         <link rel="stylesheet" href="slider/jquery.mCustomScrollbar.min.css" />
         <script src="slider/jquery.mCustomScrollbar.concat.min.js"></script>
+        
+        <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
+        <link rel = "stylesheet" type = "text/css" href = "css/stars.css" />
+        
     </head>
     <body>
         <div class="container">
@@ -58,17 +62,17 @@
                     <c:if test="${not empty sessionScope.user}">
                         <img class="avatar" src="images/avatar.png" width ="80%">
                         <h4 id="nameUser">${sessionScope.user.getUsername()}</h4>
-                        <li class="active"><a href="#">Notifications</a>
+                        <li class="active"><a href="#">Profile</a>
                         </li>
                         <li><a href="request.jsp">Add Request</a>
                         </li>
-                        <li><a href="#">Profile</a>
+                        <li><a href="myrequests.jsp">My Requests</a>
                         </li>
-                        <li><a href="#">My Photos</a>
+                        <li><a href="AllRequestsController">All Requests</a>
                         </li>
-                        <li><a href="#">My Designs</a>
+                        <li><a href="myedits.jsp">My Designs</a>
                         </li>   
-                        <a href="#" class="hidden-sm"><i class="ion-log-out logOut"></i></a>
+                        <a href="LogoutController" class="hidden-sm"><i class="ion-log-out logOut"></i></a>
                     </c:if>
                     <c:if test="${empty sessionScope.user}">
                         <li class="active"><a href="login.jsp">Log In</a>

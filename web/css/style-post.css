@@ -2,8 +2,7 @@
     box-sizing: border-box;
 }
 
-.columns {
-    float: left;    
+.columns {  
     padding: 8px;
     height: 400px !important;
     margin-bottom: 200px;
@@ -30,7 +29,7 @@
 
 .price li {
     border-bottom: 1px solid #eee;
-    padding: 20px;
+    padding: 10px;
     text-align: center;
 }
 
@@ -51,7 +50,7 @@
 
 .imageMain
 {	
-	width: 95%;
+	width: 70%;
 }
 
 @media only screen and (max-width: 600px) {
@@ -63,11 +62,11 @@
 {
 	display: inline-block;
 	margin-left: 30% !important;
-        width: 500px;
+        width: 33%;
 }
 .postAfter{
     display: inline-block !important;
     margin-top: 25px;
-    width: 500px;
+    width: 66%;
     
 }

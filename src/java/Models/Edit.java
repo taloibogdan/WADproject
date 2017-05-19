@@ -28,10 +28,10 @@ public class Edit implements Serializable{
     private String comment = null;
     private int rating = 0;
     
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne()
     private User editor = null;
 
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne()
     private Photo original = null;
 
     
@@ -55,14 +55,20 @@ public class Edit implements Serializable{
     {
         if(pathWatermarked != null) return;
         try {
-            String[] spl = path.split("/");
+            System.out.println(path);
+            path = path.replace('/', '\\');
+            System.out.println("2: "+path);
+            String[] spl = path.split("\\\\");
+            
             String name = spl[spl.length-1].split("\\.")[0];
+            System.out.println(name);
             String pth = "";
             for(int i=0; i<spl.length-1; ++i)
                 pth += spl[i]+"/";
             String nm = "";
             for(int i=0; i<name.length(); i+=2)
                 nm += name.charAt(i);
+            System.out.println(pth+", "+nm);
             BufferedImage originalImage = ImageIO.read(new File(ConstManager.PathToWeb+path));
             int type = originalImage.getType() == 0 ? BufferedImage.TYPE_INT_ARGB : originalImage.getType();
             BufferedImage newImage = watermarkImage(originalImage, type);

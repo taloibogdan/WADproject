@@ -5,10 +5,6 @@
         <listener-class>Servlets.ContextListener</listener-class>
     </listener>
     <servlet>
-        <servlet-name>TestServlet</servlet-name>
-        <servlet-class>Servlets.TestServlet</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>RegistrationController</servlet-name>
         <servlet-class>Servlets.RegistrationController</servlet-class>
     </servlet>
@@ -20,10 +16,22 @@
         <servlet-name>RequestController</servlet-name>
         <servlet-class>Servlets.RequestController</servlet-class>
     </servlet>
-    <servlet-mapping>
-        <servlet-name>TestServlet</servlet-name>
-        <url-pattern>/TestServlet</url-pattern>
-    </servlet-mapping>
+    <servlet>
+        <servlet-name>PostController</servlet-name>
+        <servlet-class>Servlets.PostController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AllRequestsController</servlet-name>
+        <servlet-class>Servlets.AllRequestsController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EditController</servlet-name>
+        <servlet-class>Servlets.EditController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>LogoutController</servlet-name>
+        <servlet-class>Servlets.LogoutController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>RegistrationController</servlet-name>
         <url-pattern>/RegistrationController</url-pattern>
@@ -35,6 +43,22 @@
     <servlet-mapping>
         <servlet-name>RequestController</servlet-name>
         <url-pattern>/RequestController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PostController</servlet-name>
+        <url-pattern>/PostController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AllRequestsController</servlet-name>
+        <url-pattern>/AllRequestsController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditController</servlet-name>
+        <url-pattern>/EditController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LogoutController</servlet-name>
+        <url-pattern>/LogoutController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

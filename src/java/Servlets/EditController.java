@@ -5,20 +5,32 @@
  */
 package Servlets;
 
+import Managers.ConstManager;
 import Managers.DBhandler;
+import Models.Edit;
+import Models.Photo;
 import Models.User;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.io.PrintWriter;
+import java.util.Enumeration;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
 
 /**
  *
- * @author root
+ * @author Exodus
  */
-public class LoginController extends HttpServlet {
+@MultipartConfig
+public class EditController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -31,44 +43,40 @@ public class LoginController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.getSession().invalidate();
-        String identifier = request.getParameter("identifier");
-        String pass = request.getParameter("password");
-        
-        request.setAttribute("identifier", identifier);
-        request.setAttribute("password", pass);
-        
-        DBhandler db = DBhandler.getInstance();
-        
-        boolean back = false;
-        if(identifier.contains("@"))
-            if(db.checkEmailPass(identifier, pass))
-            {
-                request.getSession().setAttribute("user", db.getUserByEmail(identifier));
+        int pid = Integer.parseInt(request.getParameter("photoid"));
+        Photo original = DBhandler.getInstance().getPhoto(pid);
+        String comment = request.getParameter("description");
+        Part filePart = request.getPart("file");
+        System.out.println(comment+" "+original.getName());
+        if(filePart == null)
+            request.getRequestDispatcher("uploadEdit.jsp").forward(request, response);
+        OutputStream out = null;
+        InputStream filecontent = null;
+        try {
+            String path = "photos" + File.separator + original.getName() +
+                    "_ed_" + ConstManager.Rand.nextInt(100000000)+".jpg";
+            out = new FileOutputStream(new File(ConstManager.PathToWeb
+                    + File.separator + path));
+            filecontent = filePart.getInputStream();
+
+            int read = 0;
+            final byte[] bytes = new byte[1024];
+
+            while ((read = filecontent.read(bytes)) != -1) {
+                out.write(bytes, 0, read);
             }
-            else
-            {
-                back = true;
-                System.out.println("not email");
-            }
-        else
-        if(db.checkUserPass(identifier, pass))
-            {
-                request.getSession().setAttribute("user", db.getUser(identifier));
-            }
-            else
-            {
-                back = true;
-                System.out.println("not user");
-            }
-        if(back)
-        {
-            request.setAttribute("idenError", "The identifier and the password do not match or the user does not exist.");
-            request.getRequestDispatcher("login.jsp").forward(request, response);
-            return;
+            User u = (User)request.getSession().getAttribute("user");
+            Edit e = new Edit(path, comment, u, original);
+            DBhandler.getInstance().AddEdit(e);
+            request.getSession().setAttribute("user", DBhandler.getInstance().getUser(u.getUsername()));
+            
+        } catch (FileNotFoundException fne) {
+            System.out.println(fne.getMessage());
+        } finally {
+            if (out != null) { out.close(); }
+            if (filecontent != null) { filecontent.close(); }
         }
-        
-        request.getRequestDispatcher("index.jsp").forward(request, response);
+        request.getRequestDispatcher("PostController?postid="+pid).forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
