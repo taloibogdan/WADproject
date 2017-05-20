@@ -57,7 +57,7 @@
             <div class="postAfter" style="margin-bottom: 10%;">              
                 <div class="columns">
                     <ul class="price">
-                        <li class="grey" style="background-color: #d6e9c6">
+                        <li class="grey" style="background-color: #d6e9c6; list-style-type: none">
                             <a href="uploadEdit.jsp?photoid=${photo.getId()}" class="button">Upload an Edit</a>
                         </li>
                     </ul>
