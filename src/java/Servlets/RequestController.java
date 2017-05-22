@@ -45,8 +45,10 @@ public class RequestController extends HttpServlet {
         String name = request.getParameter("title");
         String desc = request.getParameter("description");
         Part filePart = request.getPart("file");
-        if(filePart == null)
+        if(filePart == null) {
             request.getRequestDispatcher("request.jsp").forward(request, response);
+            return;
+        }
         OutputStream out = null;
         InputStream filecontent = null;
         try {

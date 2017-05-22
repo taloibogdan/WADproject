@@ -1,70 +1,7 @@
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <meta charset="utf-8">
-        <title>Photohelp</title>
-            
-        <!--Para que no se pueda ampliar en dispositivos moviles-->
-        <meta name= "viewport" content="width=device-width, initial-scale=1">   
-        <!-- CSS -->        
-        <link rel = "stylesheet" type = "text/css" href = "css/style.css" />
-        <link rel = "stylesheet" type = "text/css" href = "css/profile.css" />
-        <link rel="stylesheet" href="css/bootstrap.min.css"> 
-        <!-- http://ionicons.com/--> 
-        <link rel='stylesheet prefetch' href='http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css'>
-        <link rel = "stylesheet" type = "text/css" href = "css/bootstrap-theme.min.css" />
+<%@include file="header.jsp" %>
 
-        <!-- JS JQuery --> 
-        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-        <!-- Bootstrap Core JavaScript -->
-        <script src="js/bootstrap.min.js"></script>
-
-        <!-- Slider --> 
-        <link rel="stylesheet" href="slider/jquery.mCustomScrollbar.min.css" />
-        <script src="slider/jquery.mCustomScrollbar.concat.min.js"></script>
-    </head>
-    <body>
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-6 col-sm-offset-3">
-                <a id="bigTitle" href="index.jsp">PHOTOHELP</a>                   
-                    <div id="imaginary_container"> 
-                        <div class="input-group stylish-input-group">
-                            <input type="text" class="form-control"  placeholder="Search #Hashtag" >
-                            <span class="input-group-addon">
-                                <button type="submit">
-                                    <span class="ion-search"></span>
-                                </button>  
-                            </span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        <div class="sidebar-nav-fixed affix">
-            <div class="well left-nav">
-                <ul class="nav">                        
-                    <img class="avatar" src="images/avatar.png" width ="80%">
-                    <h4 id="nameUser">Username</h4>
-                    <li class="active"><a href="#">Notifications</a>
-                    </li>
-                    <li><a href="profile.jsp">Profile</a>
-                    <li><a href="request.jsp">Add Request</a>
-                    </li>
-                    <li><a href="myrequests.jsp">My Requests</a>
-                    </li>                    
-                    <li><a href="#">My Designs</a>
-                    </li>   
-                    <a href="#" class="hidden-sm"><i class="ion-log-out logOut"></i></a>
-                </ul>
-                    
-            </div>
-            <!--/.well -->
-        </div>
+<link rel = "stylesheet" type = "text/css" href = "css/profile.css" />
         <div class= "cointainer profile">
             <div class="container-fluid">
                 <div class="row">
@@ -72,7 +9,7 @@
                       <img align="left" class="fb-image-lg" src="http://manosbenditas.co/public/blog/wp-content/uploads/2016/05/camera-820018_960_720-850x300.jpg" alt="Profile image example"/>
                       <img align="left" class="fb-image-profile thumbnail" src="http://www.microfusa.com/sites/shared/files/styles/user_picture/public/default_images/user-avatar.jpg?itok=Hql7aOrq&c=3e3fe9a62c749511fc986b4c7903143a" alt="Profile image example"/>
                       <div class="fb-profile-text">
-                          <h1>Username</h1>
+                          <h1>${sessionScope.user.getUsername()}</h1>
 
                       </div>
                   </div>
@@ -128,11 +65,11 @@
                                </div>
                                 <div class="form-group">
                                     <label for="fname">Full name:</label>
-                                    <p> 26 Sep 2017</p>
+                                    <p> ${sessionScope.user.getName()}</p>
                                 </div>
                                 <div class="form-group">
                                     <label for="email">email:</label>
-                                    <p> example@gmail.com</p>
+                                    <p> ${sessionScope.user.getEmail()}</p>
                                 </div>
                                 <div class="form-group">
                                    <label for="email">Other</label>
@@ -147,6 +84,5 @@
                 </div>
             </div>
         </div>
-        
-    </body>
-</html>
+
+<%@include file="footer.jsp" %>

@@ -62,7 +62,7 @@
                     <c:if test="${not empty sessionScope.user}">
                         <img class="avatar" src="images/avatar.png" width ="80%">
                         <h4 id="nameUser">${sessionScope.user.getUsername()}</h4>
-                        <li class="active"><a href="#">Profile</a>
+                        <li class="active"><a href="profile.jsp">Profile</a>
                         </li>
                         <li><a href="request.jsp">Add Request</a>
                         </li>
